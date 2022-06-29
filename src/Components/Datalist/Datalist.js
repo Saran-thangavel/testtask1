@@ -25,7 +25,7 @@ function Datalist() {
   const deleteData = (id) => {
     axios
       .delete(`https://jsonplaceholder.typicode.com/todos/${params.id}`)
-      .then((response) => {
+      .then(() => {
         const filterData = data.filter((li) => {
           return id !== li.id;
         });
@@ -57,7 +57,7 @@ function Datalist() {
                 <Card.Body>
                   <Card.Title>{value.title}</Card.Title>
                   <hr></hr>
-                  <Card.Text>{`UserId: ${value.userId}`}</Card.Text>
+                  <Card.Text>{`Id: ${value.id}`}</Card.Text>
                   <Card.Text>{`Completed: ${value.completed}`}</Card.Text>
                   <Button variant="danger" onClick={() => deleteData(value.id)}>
                     Delete
