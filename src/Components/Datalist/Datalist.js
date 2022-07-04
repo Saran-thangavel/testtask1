@@ -1,14 +1,12 @@
 import axios from "axios";
 import React, { useState, useEffect } from "react";
 import { toast, ToastContainer, Slide } from "react-toastify";
-import { useParams } from "react-router-dom";
 import { Container } from "react-bootstrap";
 import { Row, Col, Card, Button } from "react-bootstrap";
 import "react-toastify/dist/ReactToastify.css";
 
 function Datalist() {
   const [data, setData] = useState([]);
-  const params = useParams();
 
   const getData = () => {
     axios
@@ -24,13 +22,17 @@ function Datalist() {
 
   const deleteData = (id) => {
     axios
-      .delete(`https://jsonplaceholder.typicode.com/todos/${params.id}`)
-      .then(() => {
+      .delete(`https://jsonplaceholder.typicode.com/todos/${id}`)
+      .then((response) => {
+        console.log(response);
         const filterData = data.filter((li) => {
           return id !== li.id;
         });
         setData(filterData);
         toast.success("Data deleted successfully");
+      })
+      .catch((error) => {
+        console.log(error.response.data);
       });
   };
 
@@ -42,19 +44,30 @@ function Datalist() {
     <Container>
       <ToastContainer transition={Slide} autoClose={5000}></ToastContainer>
       <Row>
-        {data.map((value) => {
+        {data.map((value, index) => {
+          let status = value.completed;
           return (
-            <Col md={4}>
+            <Col md={4} key={index}>
               <Card
                 style={{
                   width: "18rem",
                   marginTop: "5%",
-                  backgroundColor: "burlywood",
+                  marginLeft: "14%",
+                  backgroundImage: "linear-gradient(#7474bf,#348ac7)",
                   boxShadow:
                     "rgba(0, 0, 0, 0.19) 0px 10px 20px, rgba(0, 0, 0, 0.23) 0px 6px 6px",
                 }}
               >
                 <Card.Body>
+                  <Card.Title>
+                    <i
+                      className="fa fa-circle"
+                      style={{
+                        padding: "4% 0 4% 90%",
+                        color: status ? "green" : "blue",
+                      }}
+                    ></i>
+                  </Card.Title>
                   <Card.Title>{value.title}</Card.Title>
                   <hr></hr>
                   <Card.Text>{`Id: ${value.id}`}</Card.Text>

@@ -29,6 +29,18 @@ const Header = () => {
           </Navbar.Collapse>
         </Container>
       </Navbar>
+      <div>
+        <i
+          className="fa fa-circle"
+          style={{ padding: "4% 0 4% 0", color: "green" }}
+        ></i>
+        <label>&nbsp;True</label>
+        <i
+          className="fa fa-circle"
+          style={{ padding: "4% 0 4% 0", color: "blue", marginLeft: "2%" }}
+        ></i>
+        <label>&nbsp;False</label>
+      </div>
     </div>
   );
 };
