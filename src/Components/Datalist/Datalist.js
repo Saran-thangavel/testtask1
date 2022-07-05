@@ -12,7 +12,6 @@ function Datalist() {
     axios
       .get("https://jsonplaceholder.typicode.com/todos")
       .then((response) => {
-        console.log(response);
         setData(response.data);
       })
       .catch((error) => {
@@ -24,7 +23,6 @@ function Datalist() {
     axios
       .delete(`https://jsonplaceholder.typicode.com/todos/${id}`)
       .then((response) => {
-        console.log(response);
         const filterData = data.filter((li) => {
           return id !== li.id;
         });
